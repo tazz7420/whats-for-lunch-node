@@ -1,0 +1,57 @@
+.homepage {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  
+
+
+
+  .carousel {
+    position: absolute;
+    box-shadow: 2px 2px 5px gray;
+    width: 50vw;
+    height: 28vw;
+    border-radius: 50px;
+    overflow: hidden;
+    top: 18vw;
+
+
+
+    .img-container {
+      display: flex;
+      transform: translateX(0);
+      transition: transform 0.5s ease-in-out;
+    }
+    img {
+      width: 50vw;
+      border-radius: 50px;
+      object-fit: cover;
+    }
+  }
+
+  .textblock1 {
+    position: absolute;
+    top: 30vw;
+    width: 35vw;
+    right: 5%;
+    font-size: 2vw;
+  }
+  .textblock2 {
+    position: absolute;
+    top: 50vw;
+    width: 55vw;
+    left: 5%;
+    font-size: 2vw;
+    display: flex;
+    justify-content: space-between;
+    .googlemap {
+      width: 45%;
+    }
+    .osm {
+      width: 45%;
+    }
+    .text2 {
+      font-size: 1.25vw;
+    }    
+  }
+}

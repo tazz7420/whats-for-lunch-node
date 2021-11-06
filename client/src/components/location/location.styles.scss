@@ -1,0 +1,19 @@
+.location {
+    justify-content: space-between;
+    font-size: 1.5vw;
+
+    .placelist {
+        position: absolute;
+        height: 50vw;
+        top: 55vw;
+        left: 10vw;
+        font-size: 1.5vw;
+    }
+
+    .modelspace {
+        position: absolute;
+        right: 20vw;
+        top: 65vw;
+        height: 30vw;
+    }
+}
