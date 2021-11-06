@@ -2,19 +2,20 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const app = express();
+
 const path = require('path');
 
-// const port = process.env.PORT || 5000;
-const port = process.env.NODE_ENV === 'production' ? 'https://whats-for-lunch-withnodejs.herokuapp.com/' : process.env.PORT || 5000;
 
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
+const app = express();
+const port = process.env.PORT || 5000;
 
 app.use(cors({
     origin: [port],
   }))
 
-if (process.env.NODE_ENV !== 'production') require('dotenv').config();
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
