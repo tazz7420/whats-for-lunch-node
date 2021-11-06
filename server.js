@@ -13,7 +13,7 @@ const port = process.env.PORT || 5000;
 
 app.use(cors({
     origin: [port],
-  }))
+}))
 
 
 
@@ -31,7 +31,12 @@ if (process.env.NODE_ENV === 'production') {
 app.listen(port, () => {
     console.log('Server running on port ' + port);
 });
-app.get('/googlemapapi', async  (req, res, next) => {
+
+app.get('/echo', (req, res) => { //Line 9
+    res.send({ echo: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); //Line 10
+  });
+
+app.get('/googlemapapi', async (req, res, next) => {
     console.log("'/test' call");
     console.log(req.query)
     const latitude = req.query.latitude;
@@ -39,7 +44,6 @@ app.get('/googlemapapi', async  (req, res, next) => {
     console.log(latitude, longitude);
     try {
         const { data: result } = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=10000&type=restaurant&language=zh-TW&key=AIzaSyApORX8OKehWcSAVnBbqCGetlLwT1HP9Oo`)
-        console.log(result)
         res.send(result)
     }
 
