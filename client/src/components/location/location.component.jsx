@@ -154,7 +154,7 @@ const Location = () => {
                         longitude: position.coords.longitude
                     }
                 }).then(function (res) {
-                    console.log(res.data)
+                    console.log(res)
                     setPlaces(res.data)
                 })
 
