@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 
-const port = process.env.PORT || 5000;
+// const port = process.env.PORT || 5000;
+const port = process.env.NODE_ENV === 'production' ? 'https://whats-for-lunch-withnodejs.herokuapp.com/' : process.env.PORT || 5000;
 
 
 
@@ -37,6 +38,7 @@ app.get('/googlemapapi', async  (req, res, next) => {
     console.log(latitude, longitude);
     try {
         const { data: result } = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=10000&type=restaurant&language=zh-TW&key=AIzaSyApORX8OKehWcSAVnBbqCGetlLwT1HP9Oo`)
+        console.log(result)
         res.send(result)
     }
 
