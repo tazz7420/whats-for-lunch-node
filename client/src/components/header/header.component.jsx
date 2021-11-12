@@ -22,6 +22,13 @@ const Header = () => {
                 <Link className='option' to="/googlemappage">Map</Link>
                 <Link className='option' to="/contact">Contact</Link>
                 <Link className='option' to="/sign-in">Sign in</Link>
+                <div className='dropdown'>menu
+                    <Link className='dropdown-content' to="/about">About</Link>
+                    <Link className='dropdown-content' to="/news">News</Link>
+                    <Link className='dropdown-content' to="/googlemappage">Map</Link>
+                    <Link className='dropdown-content' to="/contact">Contact</Link>
+                    <Link className='dropdown-content' to="/sign-in">Sign in</Link>
+                </div>
             </div>
         </div>
     )
