@@ -1,6 +1,38 @@
 .location {
     justify-content: space-between;
     font-size: 1.5vw;
+    @media screen and (max-width:720px) {
+        justify-content: center;
+    }
+
+    .locate-current-position {
+        position:relative;
+        left:5vw;
+        @media screen and (max-width:720px) {
+            top:30px;
+            left:12vw;
+        }
+    }
+
+    .locate-keyin-position {
+        position:relative;
+        left:5vw;
+        top:3vw;
+        @media screen and (max-width:720px) {
+            top:40px;
+            left:12vw;
+        }
+    }
+
+    .searching-near-place {
+        position:relative;
+        left:10vw;
+        top: 15vw;
+        @media screen and (max-width:720px) {
+            top:120px;
+            left:12vw;
+        }
+    }
 
     .placelist {
         position: absolute;
@@ -8,6 +40,10 @@
         top: 55vw;
         left: 10vw;
         font-size: 1.5vw;
+        @media screen and (max-width:720px) {
+            top:700px;
+            left:5vw;
+        }
     }
 
     .modelspace {
@@ -15,5 +51,9 @@
         right: 20vw;
         top: 65vw;
         height: 30vw;
+        @media screen and (max-width:720px) {
+            top:800px;
+            left:60vw;
+        }
     }
 }

@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import { CoordinatesContext } from '../../providers/coordinates/coordinates';
 import axios from 'axios';
+import FormInput from '../form-input/form-input.component'
 import './location.styles.scss'
 
 const initialValue = ['null']
@@ -9,6 +10,7 @@ const initialValue = ['null']
 const Location = () => {
     const [latitude, setLatitude] = useState(0)
     const [longitude, setLongitude] = useState(0)
+    const [changePosition, setPostion] = useState(false)
     const [places, setPlaces] = useState({})
     const [placeList, setPlaceList] = useState(initialValue)
     const [drawing, setDrawing] = useState(false);
@@ -16,6 +18,7 @@ const Location = () => {
     const [startRotate, setRotate] = useState(false);
     const [redli, setRedli] = useState(0)
     const [rotateAng, setRotateAng] = useState(0);
+    const [address, setAddress] = useState('');
     const { changeLatitude, changeLongitude } = useContext(CoordinatesContext)
     const canvasRef = useRef(null);
     const liRef = useRef()
@@ -134,6 +137,23 @@ const Location = () => {
         }
     }, [redli, drawingColor])
 
+    useEffect(() => {
+        if (changePosition === true) {
+            axios({
+                url: 'googlemapapi',
+                method: 'get',
+                params: {
+                    latitude: latitude,
+                    longitude: longitude
+                }
+            }).then(function (res) {
+                console.log(res)
+                setPlaces(res.data)
+            })
+            setPostion(false)
+        }
+    },[changePosition])
+
 
     const handleClick = (event) => {
         if (navigator.geolocation) {
@@ -150,18 +170,19 @@ const Location = () => {
                 setLongitude(position.coords.longitude)
                 changeLatitude(position.coords.latitude)
                 changeLongitude(position.coords.longitude)
+                setPostion(true)
                 console.log('success')
-                axios({
-                    url: 'googlemapapi',
-                    method: 'get',
-                    params: {
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude
-                    }
-                }).then(function (res) {
-                    console.log(res)
-                    setPlaces(res.data)
-                })
+                // axios({
+                //     url: 'googlemapapi',
+                //     method: 'get',
+                //     params: {
+                //         latitude: position.coords.latitude,
+                //         longitude: position.coords.longitude
+                //     }
+                // }).then(function (res) {
+                //     console.log(res)
+                //     setPlaces(res.data)
+                // })
 
 
             }
@@ -175,10 +196,17 @@ const Location = () => {
     }
     const nearPlace = (event) => {
         setPlaceList([])
-        for (let i = 0; i < places.results.length; i++) {
-            setPlaceList(arr => [...arr, places.results[i].name])
+        if (places.results.length === 0) {
+            console.log('no data')
+            setDrawing(false)
+            setPlaceList(arr => [...arr, '附近沒有餐廳唷'])
+        } else {
+            for (let i = 0; i < places.results.length; i++) {
+                setPlaceList(arr => [...arr, places.results[i].name])
+            }
+            setDrawing(true)
         }
-        setDrawing(true)
+
     }
 
     const startRotating = (event) => {
@@ -186,23 +214,69 @@ const Location = () => {
         console.log(startRotate)
     }
 
+    const handleSubmit = async (event) => {
+        axios({
+            url: 'geocoding',
+            method: 'get',
+            params: {
+                address: address
+            }
+        }).then(function (res) {
+            console.log(res.data.results[0].geometry.location)
+            changeLatitude(res.data.results[0].geometry.location.lat)
+            changeLongitude(res.data.results[0].geometry.location.lng)
+            setLatitude(res.data.results[0].geometry.location.lat)
+            setLongitude(res.data.results[0].geometry.location.lng)
+            setPostion(true)
+        })
+        
+    }
+
+    const handleChange = (event) => {
+        const { value } = event.target;
+        setAddress(value)
+    }
+
 
 
     return (
         <div className='location'>
-            <button className='button' onClick={handleClick}>定位您目前的位置</button>
-            <div>
-                您的緯度：{latitude}
+
+            <div className='locate-current-position'>
+                <button className='button' onClick={handleClick}>定位您目前的位置</button>
+                <div>
+                    您的緯度：{latitude}
+                </div>
+                <div>
+                    您的經度：{longitude}
+                </div>
             </div>
-            <div>
-                您的經度：{longitude}
+
+            <div className='locate-keyin-position'>
+                <button onClick={handleSubmit}>用地址定位您的位置</button>
+                <form onSubmit={handleSubmit}>
+                    <FormInput
+                        type='text'
+                        name='address'
+                        value={address}
+                        onChange={handleChange}
+                        label='地址'
+                        required
+                    />
+                </form>
+
             </div>
-            <button className='button' onClick={nearPlace}>尋找附近餐廳</button>
+
+            <div className='searching-near-place'>
+                <button className='button' onClick={nearPlace}>尋找附近餐廳</button>
+            </div>
+
             <div className='placelist'>
                 <ol ref={liRef}>
                     {placeList.map((item, i) => <li key={i}>{item}</li>)}
                 </ol>
             </div>
+
             <canvas
                 ref={canvasRef}
                 className="modelspace"

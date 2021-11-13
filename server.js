@@ -32,8 +32,8 @@ app.listen(port, () => {
     console.log('Server running on port ' + port);
 });
 
-app.get('/echo', (req, res) => { //Line 9
-    res.send({ echo: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); //Line 10
+app.get('/echo', (req, res) => { 
+    res.send({ echo: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
   });
 
 app.get('/googlemapapi', async (req, res, next) => {
@@ -43,7 +43,23 @@ app.get('/googlemapapi', async (req, res, next) => {
     const longitude = req.query.longitude;
     console.log(latitude, longitude);
     try {
-        const { data: result } = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=10000&type=restaurant&language=zh-TW&key=AIzaSyApORX8OKehWcSAVnBbqCGetlLwT1HP9Oo`)
+        const { data: result } = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type=restaurant&language=zh-TW&key=AIzaSyApORX8OKehWcSAVnBbqCGetlLwT1HP9Oo`)
+        res.send(result)
+    }
+
+    catch (err) {
+        console.error("GG", err);
+    }
+})
+
+app.get('/geocoding', async (req, res, next) => {
+    console.log("'/geocoding' call");
+    console.log(req.query)
+    const address = encodeURI(req.query.address);
+    console.log(address);
+    try {
+        const {data: result } = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyBO7fZmEjMNueQmTQ7YkjO6rwBAvLUlSBQ`)
+        console.log(result)
         res.send(result)
     }
 

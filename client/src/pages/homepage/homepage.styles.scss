@@ -2,9 +2,9 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  
-
-
+  @media screen and (max-width: 720px) {
+    justify-content: center;
+  }
 
   .carousel {
     position: absolute;
@@ -14,8 +14,9 @@
     border-radius: 50px;
     overflow: hidden;
     top: 18vw;
-
-
+    @media screen and (max-width: 720px) {
+      top: 45vw;
+    }
 
     .img-container {
       display: flex;
@@ -35,6 +36,10 @@
     width: 35vw;
     right: 5%;
     font-size: 2vw;
+    @media screen and (max-width: 720px) {
+      left: 25vw;
+      width: 100%;
+    }
   }
   .textblock2 {
     position: absolute;
@@ -44,6 +49,12 @@
     font-size: 2vw;
     display: flex;
     justify-content: space-between;
+    @media screen and (max-width: 720px) {
+      position:relative;
+      width: 100%;
+      left: 10vw;
+      top: 75vw;
+    }
     .googlemap {
       width: 45%;
     }
@@ -52,6 +63,6 @@
     }
     .text2 {
       font-size: 1.25vw;
-    }    
+    }
   }
 }

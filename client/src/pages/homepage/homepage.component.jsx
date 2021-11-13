@@ -31,7 +31,7 @@ const HomePage = () => {
             <div className='textblock2'>
                 <div className='googlemap' style={{color: idx ? 'black' : 'gray' }}>
                     <div><b>Google map</b></div>
-                    <div className='text2'>使用google maps platfrom的服務，協助使用者探索世界。讓使用者透過電話號碼、地址和即時信號找到特定地點。</div>
+                    <div className='text2'>使用google maps platfrom的服務。讓使用者透過坐標、地址和即時信號找到附近地點。</div>
                     <div className='text2'>（有使用次數的限制）</div>
                 </div>
                 <div className='osm' style={{color: idx ? 'gray' : 'black' }}>

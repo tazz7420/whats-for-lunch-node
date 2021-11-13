@@ -5,7 +5,7 @@ import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
 import GoogleMapPage from './pages/googlemap/googlemap.component';
 
-import './App.css';
+import './App.scss';
 
 
 const App = () => {

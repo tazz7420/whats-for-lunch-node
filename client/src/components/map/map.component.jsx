@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { CoordinatesContext } from '../../providers/coordinates/coordinates';
 
+import './map.styles.scss'
+
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const SimpleMap = () => {
@@ -22,10 +24,10 @@ const SimpleMap = () => {
 
     return (
         // Important! Always set the container height explicitly
-        <div style={{ height: '40vw', width: '60%' }}>
+        <div className='googlemap'>
             <GoogleMapReact
                 bootstrapURLKeys={{
-                    key: process.env.REACT_APP_GOOGLE_API_KEY,
+                    key: 'AIzaSyApORX8OKehWcSAVnBbqCGetlLwT1HP9Oo',
                 }}
                 center={center}
                 zoom={zoom}
