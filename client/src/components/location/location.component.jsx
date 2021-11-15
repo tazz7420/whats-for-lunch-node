@@ -253,7 +253,7 @@ const Location = () => {
             </div>
 
             <div className='locate-keyin-position'>
-                <button onClick={handleSubmit}>用地址定位您的位置</button>
+                <button className='button' onClick={handleSubmit}>用地址定位您的位置</button>
                 <form onSubmit={handleSubmit}>
                     <FormInput
                         type='text'

@@ -9,8 +9,7 @@
         position:relative;
         left:5vw;
         @media screen and (max-width:720px) {
-            top:30px;
-            left:12vw;
+            top:5vw;
         }
     }
 
@@ -19,8 +18,7 @@
         left:5vw;
         top:3vw;
         @media screen and (max-width:720px) {
-            top:40px;
-            left:12vw;
+            top:8vw;
         }
     }
 
@@ -29,8 +27,7 @@
         left:10vw;
         top: 15vw;
         @media screen and (max-width:720px) {
-            top:120px;
-            left:12vw;
+            top:20vw;
         }
     }
 
@@ -41,19 +38,32 @@
         left: 10vw;
         font-size: 1.5vw;
         @media screen and (max-width:720px) {
-            top:700px;
-            left:5vw;
+            position: relative;
+            top:20vw;
+            left:-10vw;
         }
     }
 
     .modelspace {
         position: absolute;
-        right: 20vw;
+        right: 10vw;
         top: 65vw;
         height: 30vw;
         @media screen and (max-width:720px) {
-            top:800px;
-            left:60vw;
+            position: relative;
+            left:50vw;
+            top:-10vw;
         }
     }
+.button {
+    font-size: 10px;
+    border-radius: 25px;
+    background-color: whitesmoke;
+    border: 2px solid gray;
+    transition-duration: 0.4s
+}
+.button:hover {
+    background-color: gray; /* Green */
+    color: whitesmoke;
+  }
 }
