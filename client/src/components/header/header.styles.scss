@@ -79,6 +79,7 @@
         position: relative;
         top: 15px;
         display: inline-block;
+        cursor: pointer;
         .dropdown-content {
             display: none;
             position: relative;
@@ -109,6 +110,7 @@
     display: block;
     cursor: pointer;
 }
+
 .dropdown:hover .dropdown-content2 {
     display: block;
     cursor: not-allowed;

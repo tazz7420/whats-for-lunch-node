@@ -67,11 +67,7 @@ const Location = () => {
                 context.beginPath()
                 // 為了區分不同的色塊,我們使用隨機生成的顏色作為色塊的填充色
                 context.fillStyle = `rgb(${255 - 10 * i}, ${255 - 10 * i},${255 - 10 * i})`
-                // 這裡需要使用moveTo方法將初始位置定位在圓點處,這樣繪製的圓
-                // 弧都會以圓點作為閉合點,下面有使用moveTo和不使用moveTo的對比圖
                 context.moveTo(150, 150)
-                // 畫圓弧時,每次都會自動調用moveTo,將畫筆移動到圓弧的起點,半
-                // 徑我們設置的比轉盤稍小一點
                 context.arc(150, 150, 150, startRadian, endRadian, false)
                 context.fill();
                 context.restore();
@@ -172,19 +168,6 @@ const Location = () => {
                 changeLongitude(position.coords.longitude)
                 setPostion(true)
                 console.log('success')
-                // axios({
-                //     url: 'googlemapapi',
-                //     method: 'get',
-                //     params: {
-                //         latitude: position.coords.latitude,
-                //         longitude: position.coords.longitude
-                //     }
-                // }).then(function (res) {
-                //     console.log(res)
-                //     setPlaces(res.data)
-                // })
-
-
             }
 
             // 跟使用者拿所在位置的權限

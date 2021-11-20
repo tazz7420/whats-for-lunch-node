@@ -67,6 +67,3 @@ app.get('/geocoding', async (req, res, next) => {
         console.error("GG", err);
     }
 })
-// axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=25.06946,121.66105&radius=1000&type=restaurant&language=zh-TW&key=AIzaSyApORX8OKehWcSAVnBbqCGetlLwT1HP9Oo`).then(function (res) {
-//     console.log(res.data)
-// })

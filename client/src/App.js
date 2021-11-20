@@ -2,8 +2,10 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Header from './components/header/header.component';
+import Footer from './components/footer/footer.component';
 import HomePage from './pages/homepage/homepage.component';
 import GoogleMapPage from './pages/googlemap/googlemap.component';
+import AboutPage from './pages/about/about.component';
 
 import './App.scss';
 
@@ -15,7 +17,9 @@ const App = () => {
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route exact path='/googlemappage' component={GoogleMapPage} />
+        <Route exact path='/about' component={AboutPage} />
       </Switch>
+      <Footer />
     </div>
   )
 }
