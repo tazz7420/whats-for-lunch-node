@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import NewsItems from '../../components/news-items/news-items.component';
 import NEWS_DATA from './news.data.js';
@@ -12,32 +12,37 @@ const NewsPage = () => {
 
     // let collection = collections.filter(theNews => theNews.id > collections.length - 6)
     const [collections, setCollections] = useState(data);
-    const [collection, setCollection] = useState(collections.filter(theNews => theNews.id > collections.length - 6));
+    const [collection, setCollection] = useState(collections.filter(theNews => theNews.id > collections.length - 5));
     const [pageCount, setPageCount] = useState([]);
     const [handleButton, setHandleButton] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1)
+    const buttonRef = useRef()
     useEffect(() => {
         setPageCount([])
-        if (data.length % 6 > 0) {
-            for (let i = 1; i < data.length / 6 + 1; i++) {
+        if (collections.length % 5 > 0) {
+            for (let i = 1; i < collections.length / 5 + 1; i++) {
                 setPageCount(arr => [...arr, i])
             }
         } else {
-            for (let i = 1; i < data.length / 6; i++) {
+            for (let i = 1; i < collections.length / 5; i++) {
                 setPageCount(arr => [...arr, i])
             }
         }
         console.log(pageCount)
-    }, [data])
+    }, [collections])
 
     useEffect(() => {
         if (handleButton === 1){
-            setCollection(collections.filter(theNews => theNews.id > collections.length - 6))
+            setCollections(data)
+            setCollection(collections.filter((theNews, idx) => (currentPage-1)*5 <= idx && idx < (currentPage)*5))
         } else if (handleButton === 2){
-            setCollection(collections.filter(theNews => theNews.id > collections.length - 6).filter(theNews => theNews.type === 'maintian').filter((theNews, idx) => idx < 6))
+            setCollections(data.filter(theNews => theNews.type === 'maintian'))
+            setCollection(collections.filter((theNews, idx) => (currentPage-1)*5 <= idx && idx < (currentPage)*5))
         } else if (handleButton === 3){
-            setCollection(collections.filter(theNews => theNews.id > collections.length - 6).filter(theNews => theNews.type === 'update').filter((theNews, idx) => idx < 6))
+            setCollections(data.filter(theNews => theNews.type === 'update'))
+            setCollection(collections.filter((theNews, idx) => (currentPage-1)*5 <= idx && idx < (currentPage)*5))
         }
-    },[collections, handleButton])
+    },[handleButton, collections, currentPage])
 
     const handleclickAll = () => {
         setHandleButton(1)
@@ -53,7 +58,11 @@ const NewsPage = () => {
 
     const handleCurrentPage = (event) => {
         console.log(event.target.id)
-        setCollections(data.filter(theNews => theNews.id <= data.length - (event.target.id-1)*6))
+        buttonRef.current.children[currentPage-1].style.fontWeight = 'normal'
+        buttonRef.current.children[currentPage-1].style.textDecoration = 'none'
+        setCurrentPage(event.target.id)  
+        event.target.style.fontWeight = 'bold'
+        event.target.style.textDecoration = 'underline'      
     }
     return (
         <div className='news-items row'>
@@ -75,7 +84,7 @@ const NewsPage = () => {
                     {collection.map(({ id, ...otherCollectionProps }) => (
                         <NewsItems {...otherCollectionProps} />
                     ))}
-                    <div className='text-center'>
+                    <div ref={buttonRef} className='text-center'>
                         {pageCount.map(page => (
                             <button id={page} className=' btn btn-sm btn-outline-dark' onClick={handleCurrentPage}>{page}</button>
                         ))}

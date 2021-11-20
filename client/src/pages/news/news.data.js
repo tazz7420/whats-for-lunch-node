@@ -52,7 +52,7 @@ const NEWS_DATA = [
                 id: 10,
                 time: '2021.11.20',
                 type: 'maintian',
-                title: 'Update News Test10',
+                title: 'Maintain News Test10',
                 content: 'Update News TestUpdate News TestUpdate News TestUpdate News TestUpdate News TestUpdate News TestUpdate News Test'
             },
 
