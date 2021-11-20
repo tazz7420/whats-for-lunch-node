@@ -1,0 +1,21 @@
+.button-group {
+    display: block;
+    .button-style {
+        width: 18vw;
+        @media screen and (max-width:1800px){
+            width: 280px;
+        }
+        @media screen and (max-width:900px){
+            width: 150px;
+        }
+        @media screen and (max-width:600px){
+            width: 100px;
+        }
+    }
+}
+.news-items {
+    position:absolute;
+    top: 150px;
+    width: 99%;
+    left:36px;
+}

@@ -30,11 +30,11 @@ const Footer = () => {
                 </div>
             </Link>
             <div className='options'>
-                <Link className='option2' to="/about">About</Link>
-                <Link className='option2' to="/news">News</Link>
-                <Link className='option' to="/googlemappage">Map</Link>
-                <Link className='option2' to="/contact">Contact</Link>
-                <Link className='option2' to="/sign-in">Sign in</Link>
+                <Link className='option' to="/about">About</Link>
+                <Link className='option' to="/news">News</Link>
+                <Link className='option' to="/googlemappage">What's for lunch</Link>
+                <Link className='option' to="/contact">Contact</Link>
+                <Link className='option' to="/sign-in">Sign in</Link>
             </div>
         </div>
     )

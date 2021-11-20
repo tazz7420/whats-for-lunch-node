@@ -1,0 +1,16 @@
+.news-item {
+    margin-bottom: 15px;
+
+    .news-content {
+        height: 200px;
+
+        .title{
+            margin-bottom: -40px;
+            
+        }
+        .content{
+            font-size:15px;
+            padding: 25px;
+        }
+    }
+}
