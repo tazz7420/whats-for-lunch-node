@@ -28,7 +28,7 @@ const NewsPage = () => {
                 setPageCount(arr => [...arr, i])
             }
         }
-        console.log(pageCount)
+        // console.log(pageCount)
     }, [collections])
 
     useEffect(() => {
@@ -57,7 +57,7 @@ const NewsPage = () => {
     }
 
     const handleCurrentPage = (event) => {
-        console.log(event.target.id)
+        // console.log(event.target.id)
         buttonRef.current.children[currentPage-1].style.fontWeight = 'normal'
         buttonRef.current.children[currentPage-1].style.textDecoration = 'none'
         setCurrentPage(event.target.id)  
@@ -82,7 +82,7 @@ const NewsPage = () => {
                 </div>
                 <div className='col-8 row'>
                     {collection.map(({ id, ...otherCollectionProps }) => (
-                        <NewsItems {...otherCollectionProps} />
+                        <NewsItems key={id} {...otherCollectionProps} />
                     ))}
                     <div ref={buttonRef} className='text-center'>
                         {pageCount.map(page => (

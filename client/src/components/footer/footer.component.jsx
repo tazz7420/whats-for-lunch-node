@@ -34,7 +34,6 @@ const Footer = () => {
                 <Link className='option' to="/news">News</Link>
                 <Link className='option' to="/googlemappage">What's for lunch</Link>
                 <Link className='option' to="/contact">Contact</Link>
-                <Link className='option' to="/sign-in">Sign in</Link>
             </div>
         </div>
     )

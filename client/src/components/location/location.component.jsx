@@ -23,12 +23,12 @@ const Location = () => {
     const canvasRef = useRef(null);
     const liRef = useRef()
 
-    axios({
-        url: 'echo',
-        method: 'get',
-    }).then(function (res) {
-        console.log(res)
-    })
+    // axios({
+    //     url: 'echo',
+    //     method: 'get',
+    // }).then(function (res) {
+    //     console.log(res)
+    // })
     useEffect(() => {
         setRotateAng(0)
         const countDownSecond = Math.floor(Math.random() * 4) + 1;
@@ -86,7 +86,7 @@ const Location = () => {
                 context.restore()
                 // console.log(startRadian%(2*Math.PI)-5.34)
                 let min = startRadian % (2 * Math.PI) - RadianGap - 4.71
-                console.log(startRadian % (2 * Math.PI) - RadianGap)
+                // console.log(startRadian % (2 * Math.PI) - RadianGap)
                 if (min <= 0) {
                     if (Math.abs(min) < distance) {
                         distance = Math.abs(min);

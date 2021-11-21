@@ -111,6 +111,13 @@ const NEWS_DATA = [
                 type: 'maintian',
                 title: '維護公告：測試標題測試標題',
                 content: '測試內容測試內容測試內容測試內容測試內容測試內容'
+            },
+            {
+                id: 17,
+                time: '2021.11.21',
+                type: 'update',
+                title: '更新訊息：新增使用google帳號登入',
+                content: '可以使用google帳號登入，並於下次更新新增常用地點定位以及儲存常用地點'
             }
 ]
 

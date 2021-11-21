@@ -2,8 +2,8 @@ import React, { createContext, useState, useEffect } from 'react';
 import { changeValue } from './coordinates.utils';
 
 export const CoordinatesContext = createContext({
-    latitude: 23,
-    longitude: 121,
+    latitude: 25.0338041,
+    longitude: 121.5645561,
     center: {
         lat: 0,
         lng: 0
@@ -13,9 +13,9 @@ export const CoordinatesContext = createContext({
 })
 
 const CoordinatesProvider = ({ children }) => {
-    const [latitude, setLatitude] = useState(23)
-    const [longitude, setLongitude] = useState(121)
-    const [center, setCenter] = useState({ lat: 0, lng: 0 })
+    const [latitude, setLatitude] = useState(25.0338041)
+    const [longitude, setLongitude] = useState(121.5645561)
+    const [center, setCenter] = useState({ lat: 25.0338041, lng: 121.5645561 })
 
     const changeLatitude = value => setLatitude(changeValue(latitude, value));
     const changeLongitude = value => setLongitude(changeValue(longitude, value));
