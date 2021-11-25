@@ -19,7 +19,7 @@ const Location = () => {
     const [redli, setRedli] = useState(0)
     const [rotateAng, setRotateAng] = useState(0);
     const [address, setAddress] = useState('');
-    const { changeLatitude, changeLongitude } = useContext(CoordinatesContext)
+    const { changeLatitude, changeLongitude, addRestaurant, restaurantPlace, cleanRestaurant } = useContext(CoordinatesContext)
     const canvasRef = useRef(null);
     const liRef = useRef()
 
@@ -148,10 +148,11 @@ const Location = () => {
             })
             setPostion(false)
         }
-    },[changePosition])
+    }, [changePosition])
 
 
     const handleClick = (event) => {
+        cleanRestaurant()
         if (navigator.geolocation) {
 
             // 使用者不提供權限，或是發生其它錯誤
@@ -186,8 +187,12 @@ const Location = () => {
         } else {
             for (let i = 0; i < places.results.length; i++) {
                 setPlaceList(arr => [...arr, places.results[i].name])
+                addRestaurant(places.results[i].geometry.location)
             }
             setDrawing(true)
+            console.log(restaurantPlace)
+            changeLatitude(latitude+0.000001)
+            changeLongitude(longitude+0.000001)
         }
 
     }
@@ -198,6 +203,7 @@ const Location = () => {
     }
 
     const handleSubmit = async (event) => {
+        cleanRestaurant()
         axios({
             url: 'geocoding',
             method: 'get',
@@ -212,7 +218,7 @@ const Location = () => {
             setLongitude(res.data.results[0].geometry.location.lng)
             setPostion(true)
         })
-        
+
     }
 
     const handleChange = (event) => {

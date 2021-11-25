@@ -4,11 +4,12 @@ import { CoordinatesContext } from '../../providers/coordinates/coordinates';
 
 import './map.styles.scss'
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const AnyReactComponent = ({ text }) => <div><b>{text}</b></div>;
+const RestaurantReactComponent = ({ text }) => <div style={{color: 'blue'}}><b>{text}</b></div>;
 
 const SimpleMap = () => {
-    const { latitude, longitude } = useContext(CoordinatesContext)
-    const zoom = 16;
+    const { latitude, longitude, restaurantPlace } = useContext(CoordinatesContext)
+    const [zoom, setZoom] = useState(16);
     const [center, setCenter] = useState({
         lat: latitude,
         lng: longitude
@@ -21,6 +22,9 @@ const SimpleMap = () => {
         })
     }, [latitude, longitude])
 
+    useEffect(() => {
+        console.log(restaurantPlace)
+    },[restaurantPlace])
 
     return (
         // Important! Always set the container height explicitly
@@ -37,8 +41,12 @@ const SimpleMap = () => {
                     lng={longitude}
                     text="Your location"
                 />
+                {restaurantPlace.map((place, i) => <RestaurantReactComponent
+                    lat={place.lat}
+                    lng={place.lng}
+                    text={i+1}
+                />)}
             </GoogleMapReact>
-            N{latitude}, E{longitude}
         </div>
     );
 
