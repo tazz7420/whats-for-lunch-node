@@ -1,8 +1,11 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import { CoordinatesContext } from '../../providers/coordinates/coordinates';
+import { UserContext } from '../../providers/user/user';
+import { firestore } from '../../firebase/firebase.utils';
 import axios from 'axios';
 import FormInput from '../form-input/form-input.component'
 import './location.styles.scss'
+import { ReactComponent as AddIcon } from '../../assets/add-svgrepo-com.svg'
 
 const initialValue = ['null']
 
@@ -19,7 +22,9 @@ const Location = () => {
     const [redli, setRedli] = useState(0)
     const [rotateAng, setRotateAng] = useState(0);
     const [address, setAddress] = useState('');
+    const [message, setMessage] = useState('');
     const { changeLatitude, changeLongitude, addRestaurant, restaurantPlace, cleanRestaurant } = useContext(CoordinatesContext)
+    const { currentUserId, changeUserId } = useContext(UserContext);
     const canvasRef = useRef(null);
     const liRef = useRef()
 
@@ -191,8 +196,8 @@ const Location = () => {
             }
             setDrawing(true)
             console.log(restaurantPlace)
-            changeLatitude(latitude+0.000001)
-            changeLongitude(longitude+0.000001)
+            changeLatitude(latitude + 0.000001)
+            changeLongitude(longitude + 0.000001)
         }
 
     }
@@ -226,13 +231,64 @@ const Location = () => {
         setAddress(value)
     }
 
+    const addToFavoritePlace = () => {
+        firestore.doc(`lunchUser/${currentUserId}`).update({
+            favortiePlace: [latitude, longitude]
+        })
+    }
+
+    const loacteFavoritePlace = () => {
+        firestore.doc(`lunchUser/${currentUserId}`).get()
+            .then(function (res) {
+                try {
+                    console.log(res.data().favortiePlace)
+                    changeLatitude(res.data().favortiePlace[0])
+                    changeLongitude(res.data().favortiePlace[1])
+                    setLatitude(res.data().favortiePlace[0])
+                    setLongitude(res.data().favortiePlace[1])
+                    setPostion(true)
+                } catch{
+                    console.log('沒有常用位置')
+                }
+        })
+    }
+
 
 
     return (
         <div className='location'>
-
+            <div className='locate-current-position'>
+                {currentUserId === 'null' ?
+                    '' : <button className='button' onClick={loacteFavoritePlace}>常用位置定位</button>
+                }
+            </div>
             <div className='locate-current-position'>
                 <button className='button' onClick={handleClick}>定位您目前的位置</button>
+                {currentUserId === 'null' ?
+                    '' :
+                    <AddIcon
+                        className='add-place'
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        title="加入常用位置"
+                        onClick={addToFavoritePlace}
+                    />}
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">已加入常用位置</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                已將 {latitude}N，{longitude}E 加入常用位置
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div>
                     您的緯度：{latitude}
                 </div>
@@ -255,7 +311,6 @@ const Location = () => {
                 </form>
 
             </div>
-
             <div className='searching-near-place'>
                 <button className='button' onClick={nearPlace}>尋找附近餐廳</button>
             </div>

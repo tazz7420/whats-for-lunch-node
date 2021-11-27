@@ -10,7 +10,7 @@ import './header.styles.scss';
 
 const Header = () => {
     const [hidden, setHidden] = useState(false)
-    const { currentUser, changeUser } = useContext(UserContext)
+    const { currentUser, changeUser, currentUserId, changeUserId } = useContext(UserContext)
 
     const handleclick = () => {
         setHidden(!hidden)
@@ -26,6 +26,7 @@ const Header = () => {
                     .then(function (res) {
                         if (res.exists) {
                             console.log(userId, res.data().displayName)
+                            changeUserId(userId)
                         } else {
                             firestore.doc(`lunchUser/${userId}`).set({
                                 displayName: displayName
@@ -41,6 +42,7 @@ const Header = () => {
 
     const handleSignOut = () => {
         changeUser('null')
+        changeUserId('null')
     }
 
     return (

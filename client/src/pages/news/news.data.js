@@ -118,6 +118,20 @@ const NEWS_DATA = [
                 type: 'update',
                 title: '更新訊息：新增使用google帳號登入',
                 content: '可以使用google帳號登入，並於下次更新新增常用地點定位以及儲存常用地點'
+            },
+            {
+                id: 18,
+                time: '2021.11.25',
+                type: 'update',
+                title: '更新訊息：新增附近商家至google map地圖上顯示',
+                content: ' '
+            },
+            {
+                id: 19,
+                time: '2021.11.27',
+                type: 'update',
+                title: '更新訊息：新增常用地點定位',
+                content: ' '
             }
 ]
 
