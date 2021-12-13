@@ -20,17 +20,27 @@
 
 * 使用Gmail登入
 
+![login](https://user-images.githubusercontent.com/63506815/145836240-b3bf7a72-de85-48dc-8155-5138a9b71e97.JPG)
+
+* 紀錄常用地點/定位目前位置/使用地址定位
+* 搜尋附近店家
+
+![geocoding](https://user-images.githubusercontent.com/63506815/145836548-fda790a5-8cd2-496d-b945-785aa579ce16.JPG)
+
+* 簡易抽籤轉盤
+
+![wheel](https://user-images.githubusercontent.com/63506815/145836843-64e6fd40-704d-43f8-9d20-f115a8a4c735.JPG)
 
 
-## Built With
-* React - The web framework used
-* Sass - CSS preprocessor
-* Node.js - The server side used
-* Bootstrap v5.0 -
-* Google Map API - 
-* Firebase -  
+## 技術
+* React
+* Node.js
+* Express.js
+* Bootstrap v5.0 + scss手刻
+* Google Map API操作
+* Firebase操作
 
 
-## Next step
-* Complete the style of the web page belonging to the mobile phone
-* Add open street map
+## 下一階段
+* 完成響應式網頁設計
+* 新增使用Open Street Map為來源的方式製作網站
