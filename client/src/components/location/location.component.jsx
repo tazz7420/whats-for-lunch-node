@@ -27,6 +27,7 @@ const Location = () => {
     const { currentUserId, changeUserId } = useContext(UserContext);
     const canvasRef = useRef(null);
     const liRef = useRef()
+  
 
     // axios({
     //     url: 'echo',
@@ -199,7 +200,7 @@ const Location = () => {
             changeLatitude(latitude + 0.000001)
             changeLongitude(longitude + 0.000001)
         }
-
+        canvasRef.current.scrollIntoView()
     }
 
     const startRotating = (event) => {
