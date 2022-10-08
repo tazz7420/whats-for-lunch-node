@@ -1,5 +1,6 @@
 # 午餐吃什麼呢
 
+## 目前功能停用中，google map api使用期限到期
 ## Live site can be found [here](https://whats-for-lunch-withnodejs.herokuapp.com/)
 
 使用React、Node.js製作網站，主要功能有
